@@ -25,7 +25,7 @@
         <form:errors path="password" cssClass="error"/>
     </div>
     <br>
-    <input type="submit" value="Login">
+    <input type="submit" class="btn btn-primary" value="Login">
     </form:form>
 
 </body>

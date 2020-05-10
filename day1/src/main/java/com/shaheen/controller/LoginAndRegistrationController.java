@@ -1,5 +1,6 @@
 package com.shaheen.controller;
 
+import com.shaheen.model.Role;
 import com.shaheen.model.User;
 import com.shaheen.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class LoginAndRegistrationController {
             System.out.println(bindingResult);
             return "registration";
         }
-        userService.save(user);
+        userService.save(user, new Role("ROLE_USER"));
         return "redirect:/users";
     }
 }

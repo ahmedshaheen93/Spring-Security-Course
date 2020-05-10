@@ -39,7 +39,7 @@
             <form:errors path="password" cssClass="error"/>
         </div>
         <br>
-        <input type="submit" value="add user">
+        <input type="submit" class="btn btn-primary" value="register">
     </form:form>
 
 </div>

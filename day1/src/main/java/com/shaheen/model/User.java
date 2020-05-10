@@ -9,6 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NamedQueries({@NamedQuery(name = "User.findByUserName",
@@ -17,6 +19,7 @@ public class User implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "USER_ID")
     private Long id;
     @NotBlank
     @Length(min = 3, max = 30)
@@ -29,10 +32,19 @@ public class User implements UserDetails, Serializable {
 
     @NotBlank
     @Length(min = 8, max = 30)
+    @Column(name = "USERNAME", unique = true)
     private String username;
 
     @NotBlank
     private String password;
+
+    @ManyToMany(cascade = {CascadeType.DETACH
+            , CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_ROLES", joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    private Set<Role> roles = new HashSet<>(0);
 
     public User() {
     }
@@ -65,7 +77,9 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        roles.forEach(role -> authorities.add(role::getRoleName));
+        return authorities;
     }
 
     public String getPassword() {
@@ -112,6 +126,15 @@ public class User implements UserDetails, Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getUsers().add(this);
     }
 
     @Override

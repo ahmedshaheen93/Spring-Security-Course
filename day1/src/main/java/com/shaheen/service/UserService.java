@@ -1,5 +1,6 @@
 package com.shaheen.service;
 
+import com.shaheen.model.Role;
 import com.shaheen.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -11,7 +12,7 @@ public interface UserService extends UserDetailsService {
 
     User findById(Long id);
 
-    User save(User user);
+    User save(User user, Role role);
 
     User update(User user);
 
