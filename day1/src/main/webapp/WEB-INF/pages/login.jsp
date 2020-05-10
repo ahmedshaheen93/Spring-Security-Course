@@ -21,7 +21,7 @@
     </div>
     <div class="from-row">
         <label for="password"><spring:message code="user.password"/> </label>
-        <form:input path="password" cssClass="form-control" id="password"/>
+        <form:password path="password" cssClass="form-control" id="password"/>
         <form:errors path="password" cssClass="error"/>
     </div>
     <br>

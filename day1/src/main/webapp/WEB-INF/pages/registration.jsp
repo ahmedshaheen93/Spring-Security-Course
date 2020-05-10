@@ -25,7 +25,7 @@
         </div>
         <div>
             <label for="email"><spring:message code="user.email"/> </label>
-            <form:input path="email" cssClass="form-control" id="email" type="email" min="0" step="0.01"/>
+            <form:input path="email" cssClass="form-control" id="email" type="email"/>
             <form:errors path="email" cssClass="error"/>
         </div>
         <div>
@@ -35,7 +35,7 @@
         </div>
         <div>
             <label for="password"><spring:message code="user.password"/> </label>
-            <form:input path="password" cssClass="form-control" id="password" type="text"/>
+            <form:password path="password" cssClass="form-control" id="password"/>
             <form:errors path="password" cssClass="error"/>
         </div>
         <br>
